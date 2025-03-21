@@ -27,14 +27,14 @@ const Home: React.FC = () => {
               <img 
                 src={profile.avatar_url} 
                 alt="Profile" 
-                className="h-48 w-48 rounded-full border-4 border-white shadow-xl mx-auto"
+                className="h-48 w-48 rounded-full border-4 border-white shadow-xl mx-auto animate-float"
               />
               <div className="mt-6 text-center text-white">
                 <h1 className="text-3xl font-bold">{profile.name}</h1>
                 <p className="text-blue-200 mt-2">@{profile.login}</p>
               </div>
             </div>
-            <div className="p-6 md:p-8">
+            <div className="p-6 md:p-8 fade-in" style={{animationDelay: '0.3s'}}>
               <div className="prose max-w-none">
                 <p className="text-lg text-gray-600 leading-relaxed">{profile.bio}</p>
                 <div className="mt-6 space-y-3">
@@ -119,7 +119,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, color, suffix }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105">
+    <div className="bg-white p-6 rounded-xl shadow-lg transition-all duration-300 hover-lift hover:shadow-xl">
       <div className={`text-3xl font-bold ${colorClasses[color]}`}>
         {value}{suffix}
       </div>

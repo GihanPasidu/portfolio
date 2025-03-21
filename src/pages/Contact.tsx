@@ -58,13 +58,18 @@ const Contact: React.FC = () => {
             <div>
               <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
               <div className="space-y-4">
-                {socialLinks.map((social) => (
+                {socialLinks.map((social, index) => (
                   <a
                     key={social.name}
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                    className="flex items-center p-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-300 hover-lift"
+                    style={{ 
+                      animation: 'slideIn 0.5s ease-out forwards',
+                      animationDelay: `${index * 0.1}s`,
+                      opacity: 0
+                    }}
                   >
                     <span className="text-2xl mr-4">{social.icon}</span>
                     <div>

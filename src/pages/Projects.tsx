@@ -14,12 +14,19 @@ const Projects: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto animate-fade-up">
         <h2 className="text-3xl font-bold mb-2">Featured Projects</h2>
         <p className="text-gray-600 mb-8">A collection of my work and contributions</p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {repos.map(repo => (
-            <div key={repo.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 stagger-animation">
+          {repos.map((repo, index) => (
+            <div 
+              key={repo.id} 
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover-lift"
+              style={{ 
+                opacity: 0,
+                animationDelay: `${index * 0.1}s`
+              }}
+            >
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-xl font-bold text-gray-900">{repo.name}</h3>
