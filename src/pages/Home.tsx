@@ -1,6 +1,105 @@
 import React, { useEffect, useState } from 'react';
 import { GithubProfile, getGithubProfile } from '../services/github';
 
+const techStack = [
+  {
+    name: 'React',
+    icon: 'https://techstack-generator.vercel.app/react-icon.svg',
+    color: 'text-sky-500',
+    url: 'https://react.dev'
+  },
+  {
+    name: 'JavaScript',
+    icon: 'https://techstack-generator.vercel.app/js-icon.svg',
+    color: 'text-yellow-400',
+    url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'
+  },
+  {
+    name: 'TypeScript',
+    icon: 'https://techstack-generator.vercel.app/ts-icon.svg',
+    color: 'text-blue-600',
+    url: 'https://www.typescriptlang.org'
+  },
+  {
+    name: 'Python',
+    icon: 'https://techstack-generator.vercel.app/python-icon.svg',
+    color: 'text-blue-500',
+    url: 'https://www.python.org'
+  },
+  {
+    name: 'Java',
+    icon: 'https://techstack-generator.vercel.app/java-icon.svg',
+    color: 'text-red-600',
+    url: 'https://www.java.com'
+  },
+  {
+    name: 'CPP',
+    icon: 'https://techstack-generator.vercel.app/cpp-icon.svg',
+    color: 'text-blue-700',
+    url: 'https://isocpp.org'
+  },
+  {
+    name: 'CSHarp',
+    icon: 'https://techstack-generator.vercel.app/csharp-icon.svg',
+    color: 'text-green-600',
+    url: 'https://learn.microsoft.com/en-us/dotnet/csharp'
+  },
+  {
+    name: 'RestAPI',
+    icon: 'https://techstack-generator.vercel.app/restapi-icon.svg',
+    color: 'text-gray-700',
+    url: 'https://restfulapi.net'
+  },
+  {
+    name: 'Redux',
+    icon: 'https://techstack-generator.vercel.app/redux-icon.svg',
+    color: 'text-purple-600',
+    url: 'https://redux.js.org'
+  },
+  {
+    name: 'Webpack',
+    icon: 'https://techstack-generator.vercel.app/webpack-icon.svg',
+    color: 'text-blue-500',
+    url: 'https://webpack.js.org'
+  },
+  {
+    name: 'AWS',
+    icon: 'https://techstack-generator.vercel.app/aws-icon.svg',
+    color: 'text-orange-500',
+    url: 'https://aws.amazon.com'
+  },
+  {
+    name: 'Git',
+    icon: 'https://techstack-generator.vercel.app/github-icon.svg',
+    color: 'text-gray-900',
+    url: 'https://git-scm.com'
+  },
+  {
+    name: 'MySQL',
+    icon: 'https://techstack-generator.vercel.app/mysql-icon.svg',
+    color: 'text-blue-600',
+    url: 'https://www.mysql.com'
+  },
+  {
+    name: 'Django',
+    icon: 'https://techstack-generator.vercel.app/django-icon.svg',
+    color: 'text-green-700',
+    url: 'https://www.djangoproject.com'
+  },
+  {
+    name: 'Docker',
+    icon: 'https://techstack-generator.vercel.app/docker-icon.svg',
+    color: 'text-sky-600',
+    url: 'https://www.docker.com'
+  },
+  {
+    name: 'Nginx',
+    icon: 'https://techstack-generator.vercel.app/nginx-icon.svg',
+    color: 'text-green-500',
+    url: 'https://www.nginx.com'
+  }
+];
+
 const Home: React.FC = () => {
   const [profile, setProfile] = useState<GithubProfile | null>(null);
 
@@ -79,6 +178,34 @@ const Home: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Tech Stack Section */}
+        <div className="mt-8 bg-white rounded-xl shadow-lg p-6 md:p-8">
+          <h2 className="text-2xl font-bold mb-6 text-gradient">Tech Stack</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {techStack.map((tech, index) => (
+              <a
+                key={tech.name}
+                href={tech.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center p-4 bg-gray-50 rounded-lg hover-3d"
+                style={{
+                  opacity: 0,
+                  animation: 'fadeUp 0.5s ease-out forwards',
+                  animationDelay: `${index * 0.1}s`
+                }}
+              >
+                <img 
+                  src={tech.icon} 
+                  alt={tech.name}
+                  className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
+                />
+                <span className={`font-medium ${tech.color}`}>{tech.name}</span>
+              </a>
+            ))}
           </div>
         </div>
 
