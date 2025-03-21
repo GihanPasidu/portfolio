@@ -13,7 +13,7 @@ const Projects: React.FC = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-12">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient">Featured Projects</h2>
         <p className="text-gray-600 mb-6 md:mb-8">A collection of my work and contributions</p>
@@ -22,7 +22,7 @@ const Projects: React.FC = () => {
           {repos.map((repo, index) => (
             <div 
               key={repo.id} 
-              className="card-3d bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-100"
+              className="hover-3d bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-100/20"
               style={{ 
                 opacity: 0,
                 animation: 'fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards',

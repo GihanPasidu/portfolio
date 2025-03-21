@@ -222,3 +222,41 @@
 .pulse-loading {
   animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/* Professional 3D effects */
+@keyframes float3D {
+  0%, 100% { 
+    transform: translateY(0) translateZ(0) rotateX(0) rotateY(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  50% { 
+    transform: translateY(-10px) translateZ(20px) rotateX(3deg) rotateY(3deg);
+    box-shadow: 0 25px 25px rgba(0,0,0,0.1);
+  }
+}
+
+@keyframes gradientShine {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); opacity: 0.8; }
+  50% { background-position: 100% 50%; filter: hue-rotate(10deg); opacity: 1; }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); opacity: 0.8; }
+}
+
+.hover-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover-3d:hover {
+  transform: translateY(-5px) translateZ(10px) rotateX(2deg);
+  box-shadow: 
+    0 5px 15px rgba(0,0,0,0.1),
+    0 15px 35px rgba(37, 99, 235, 0.1);
+}
+
+.gradient-border {
+  position: relative;
+  background: linear-gradient(60deg, #1e40af, #3b82f6, #60a5fa);
+  background-size: 300% 300%;
+  animation: gradientShine 5s ease infinite;
+}

@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+const menuItems = [
+  { 
+    path: '/', 
+    label: 'About', 
+    icon: '👤' // Professional person icon
+  },
+  { 
+    path: '/projects', 
+    label: 'Projects', 
+    icon: '💼' // Professional briefcase icon
+  },
+  { 
+    path: '/contact', 
+    label: 'Contact', 
+    icon: '📬' // Professional mailbox icon
+  }
+];
+
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -31,11 +49,7 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
-            {[
-              { path: '/', label: 'About', icon: '👨‍💻' },
-              { path: '/projects', label: 'Projects', icon: '🚀' },
-              { path: '/contact', label: 'Contact', icon: '📧' }
-            ].map(({ path, label, icon }) => (
+            {menuItems.map(({ path, label, icon }) => (
               <Link
                 key={path}
                 to={path}
@@ -56,11 +70,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu */}
         <div className={`${isMenuOpen ? 'max-h-48' : 'max-h-0'} md:hidden overflow-hidden transition-all duration-300 ease-in-out`}>
           <div className="pt-2 pb-3 space-y-1">
-            {[
-              { path: '/', label: 'About', icon: '👨‍💻' },
-              { path: '/projects', label: 'Projects', icon: '🚀' },
-              { path: '/contact', label: 'Contact', icon: '📧' }
-            ].map(({ path, label, icon }) => (
+            {menuItems.map(({ path, label, icon }) => (
               <Link
                 key={path}
                 to={path}
