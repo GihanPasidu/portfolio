@@ -79,6 +79,40 @@
   }
 }
 
+/* Profile Photo Effects */
+@keyframes profile-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1deg);
+    box-shadow: 0 25px 15px rgba(0,0,0,0.1);
+  }
+}
+
+.profile-photo {
+  animation: profile-float 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  backface-visibility: hidden;
+}
+
+.profile-photo::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(59, 130, 246, 0.5), rgba(37, 99, 235, 0.2));
+  z-index: -1;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }

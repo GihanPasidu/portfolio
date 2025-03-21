@@ -24,15 +24,15 @@ const Home: React.FC = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-auto p-6 md:p-8 bg-gradient-to-br from-blue-800 to-blue-900 text-center">
-              <div className="relative inline-block">
-                <div className="absolute inset-0 bg-blue-400 rounded-full blur-md transform hover:scale-110 transition-transform duration-300"></div>
+              <div className="relative mx-auto w-40 h-40 md:w-48 md:h-48">
+                <div className="absolute inset-0 rounded-full bg-blue-400/30 blur-xl"></div>
+                <div className="absolute inset-0 rounded-full border-4 border-blue-400/30 animate-pulse"></div>
                 <img 
                   src={profile.avatar_url} 
                   alt={profile.name}
-                  className="relative w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white shadow-xl mx-auto object-cover hover:scale-105 transition-all duration-300 float-shadow"
+                  className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300 float-shadow"
                   style={{ 
                     objectFit: 'cover',
-                    transform: 'translateZ(0)'  // Force GPU acceleration
                   }}
                 />
               </div>
