@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { GithubProfile, getGithubProfile } from '../services/github';
 
 const techStack = [
@@ -102,20 +102,34 @@ const techStack = [
 
 const Home: React.FC = () => {
   const [profile, setProfile] = useState<GithubProfile | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const data = await getGithubProfile('GihanPasidu');
-      setProfile(data);
+      try {
+        setIsLoading(true);
+        const data = await getGithubProfile('GihanPasidu');
+        setProfile(data);
+      } catch (err) {
+        setError('Failed to load profile');
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchProfile();
   }, []);
 
-  if (!profile) return (
-    <div className="flex justify-center items-center min-h-screen">
+  if (isLoading) {
+    return <div className="flex justify-center items-center min-h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-    </div>
-  );
+    </div>;
+  }
+
+  if (error || !profile) {
+    return <div className="text-center text-red-500 p-4">{error || 'Failed to load profile'}</div>;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -128,7 +142,7 @@ const Home: React.FC = () => {
                 <div className="absolute inset-0 rounded-full border-4 border-blue-400/30 animate-pulse"></div>
                 <img 
                   src={profile.avatar_url} 
-                  alt={profile.name}
+                  alt={profile.name || 'Profile Picture'}
                   className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300 float-shadow"
                   style={{ 
                     objectFit: 'cover',
@@ -186,25 +200,7 @@ const Home: React.FC = () => {
           <h2 className="text-2xl font-bold mb-6 text-gradient">Tech Stack</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {techStack.map((tech, index) => (
-              <a
-                key={tech.name}
-                href={tech.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center p-4 bg-gray-50 rounded-lg hover-3d"
-                style={{
-                  opacity: 0,
-                  animation: 'fadeUp 0.5s ease-out forwards',
-                  animationDelay: `${index * 0.1}s`
-                }}
-              >
-                <img 
-                  src={tech.icon} 
-                  alt={tech.name}
-                  className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
-                />
-                <span className={`font-medium ${tech.color}`}>{tech.name}</span>
-              </a>
+              <TechStackItem key={tech.name} tech={tech} index={index} />
             ))}
           </div>
         </div>
@@ -244,7 +240,7 @@ interface StatCardProps {
   suffix?: string;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, color, suffix }) => {
+const StatCard = memo<StatCardProps>(({ title, value, color, suffix }) => {
   const colorClasses = {
     blue: 'text-blue-600',
     green: 'text-green-600',
@@ -260,6 +256,28 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, color, suffix }) => {
       <div className="text-gray-600 mt-1">{title}</div>
     </div>
   );
-};
+});
 
-export default Home;
+const TechStackItem = memo(({ tech, index }: { tech: typeof techStack[0]; index: number }) => (
+  <a
+    href={tech.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group flex flex-col items-center p-4 bg-gray-50 rounded-lg hover-3d"
+    style={{
+      opacity: 0,
+      animation: 'fadeUp 0.5s ease-out forwards',
+      animationDelay: `${index * 0.1}s`
+    }}
+  >
+    <img 
+      src={tech.icon} 
+      alt={tech.name}
+      loading="lazy"
+      className="w-12 h-12 mb-3 transition-transform duration-300 group-hover:scale-110"
+    />
+    <span className={`font-medium ${tech.color}`}>{tech.name}</span>
+  </a>
+));
+
+export default memo(Home);
