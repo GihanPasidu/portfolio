@@ -42,9 +42,9 @@ const Contact: React.FC = () => {
     },
     {
       name: 'WhatsApp',
-      value: '+94 76 947 7616',
+      value: '+94 76 721 9661',
       icon: '📱',
-      link: 'https://wa.me/94769477616'
+      link: 'https://wa.me/94767219661'
     }
   ];
 
