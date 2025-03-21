@@ -12,70 +12,118 @@ const Home: React.FC = () => {
     fetchProfile();
   }, []);
 
-  if (!profile) return <div>Loading...</div>;
+  if (!profile) return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>
+  );
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center md:space-x-8 bg-white p-6 rounded-lg shadow">
-          <img src={profile.avatar_url} alt="Profile" className="w-40 h-40 rounded-full mb-4 md:mb-0" />
-          <div className="text-center md:text-left">
-            <h1 className="text-3xl font-bold">{profile.name}</h1>
-            <p className="text-gray-600">@{profile.login}</p>
-            <p className="mt-2 text-gray-800">{profile.bio}</p>
-            <div className="mt-4 space-y-2">
-              {profile.location && (
-                <p className="text-gray-600">
-                  <span className="font-medium">📍 Location:</span> {profile.location}
-                </p>
-              )}
-              {profile.company && (
-                <p className="text-gray-600">
-                  <span className="font-medium">🏢 Company:</span> {profile.company}
-                </p>
-              )}
-              {profile.blog && (
-                <p className="text-gray-600">
-                  <span className="font-medium">🌐 Website:</span>{' '}
-                  <a href={profile.blog} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                    {profile.blog}
-                  </a>
-                </p>
-              )}
-              {profile.email && (
-                <p className="text-gray-600">
-                  <span className="font-medium">📧 Email:</span> {profile.email}
-                </p>
-              )}
-              <p className="text-gray-600">
-                <span className="font-medium">🎉 Joined:</span>{' '}
-                {new Date(profile.created_at).toLocaleDateString()}
-              </p>
+    <div className="container mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="md:flex">
+            <div className="md:shrink-0 p-6 md:p-8 bg-gradient-to-br from-blue-800 to-blue-900">
+              <img 
+                src={profile.avatar_url} 
+                alt="Profile" 
+                className="h-48 w-48 rounded-full border-4 border-white shadow-xl mx-auto"
+              />
+              <div className="mt-6 text-center text-white">
+                <h1 className="text-3xl font-bold">{profile.name}</h1>
+                <p className="text-blue-200 mt-2">@{profile.login}</p>
+              </div>
+            </div>
+            <div className="p-6 md:p-8">
+              <div className="prose max-w-none">
+                <p className="text-lg text-gray-600 leading-relaxed">{profile.bio}</p>
+                <div className="mt-6 space-y-3">
+                  {profile.location && (
+                    <div className="flex items-center text-gray-600">
+                      <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      {profile.location}
+                    </div>
+                  )}
+                  {profile.company && (
+                    <div className="flex items-center text-gray-600">
+                      <span className="font-medium">🏢 Company:</span> {profile.company}
+                    </div>
+                  )}
+                  {profile.blog && (
+                    <div className="flex items-center text-gray-600">
+                      <span className="font-medium">🌐 Website:</span>{' '}
+                      <a href={profile.blog} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                        {profile.blog}
+                      </a>
+                    </div>
+                  )}
+                  {profile.email && (
+                    <div className="flex items-center text-gray-600">
+                      <span className="font-medium">📧 Email:</span> {profile.email}
+                    </div>
+                  )}
+                  <div className="flex items-center text-gray-600">
+                    <span className="font-medium">🎉 Joined:</span>{' '}
+                    {new Date(profile.created_at).toLocaleDateString()}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white p-4 rounded-lg shadow text-center">
-            <div className="text-2xl font-bold text-blue-600">{profile.public_repos}</div>
-            <div className="text-gray-600">Repositories</div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow text-center">
-            <div className="text-2xl font-bold text-green-600">{profile.followers}</div>
-            <div className="text-gray-600">Followers</div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow text-center">
-            <div className="text-2xl font-bold text-purple-600">{profile.following}</div>
-            <div className="text-gray-600">Following</div>
-          </div>
-          <div className="bg-white p-4 rounded-lg shadow text-center">
-            <div className="text-2xl font-bold text-yellow-600">
-              {new Date(profile.created_at).getFullYear()}
-            </div>
-            <div className="text-gray-600">Member Since</div>
-          </div>
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StatCard
+            title="Repositories"
+            value={profile.public_repos}
+            color="blue"
+          />
+          <StatCard
+            title="Followers"
+            value={profile.followers}
+            color="green"
+          />
+          <StatCard
+            title="Following"
+            value={profile.following}
+            color="purple"
+          />
+          <StatCard
+            title="Years Active"
+            value={new Date().getFullYear() - new Date(profile.created_at).getFullYear()}
+            color="yellow"
+            suffix="yrs"
+          />
         </div>
       </div>
+    </div>
+  );
+};
+
+interface StatCardProps {
+  title: string;
+  value: number;
+  color: 'blue' | 'green' | 'purple' | 'yellow';
+  suffix?: string;
+}
+
+const StatCard: React.FC<StatCardProps> = ({ title, value, color, suffix }) => {
+  const colorClasses = {
+    blue: 'text-blue-600',
+    green: 'text-green-600',
+    purple: 'text-purple-600',
+    yellow: 'text-yellow-600'
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-xl shadow-lg transition-transform hover:scale-105">
+      <div className={`text-3xl font-bold ${colorClasses[color]}`}>
+        {value}{suffix}
+      </div>
+      <div className="text-gray-600 mt-1">{title}</div>
     </div>
   );
 };

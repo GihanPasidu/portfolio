@@ -10,9 +10,9 @@ export interface GithubProfile {
   following: number;
   location: string;
   company: string;
+  email: string;
   blog: string;
   twitter_username: string;
-  email: string;
   created_at: string;
   updated_at: string;
 }
