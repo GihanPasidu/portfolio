@@ -8,6 +8,13 @@ export interface GithubProfile {
   public_repos: number;
   followers: number;
   following: number;
+  location: string;
+  company: string;
+  blog: string;
+  twitter_username: string;
+  email: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Repository {
@@ -18,6 +25,12 @@ export interface Repository {
   topics: string[];
   language: string;
   stargazers_count: number;
+  created_at: string;
+  updated_at: string;
+  homepage: string;
+  forks_count: number;
+  watchers_count: number;
+  default_branch: string;
 }
 
 export const getGithubProfile = async (username: string): Promise<GithubProfile> => {
