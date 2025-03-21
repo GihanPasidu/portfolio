@@ -68,6 +68,17 @@
   50% { opacity: 0.5; }
 }
 
+@keyframes float-shadow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 25px -10px rgba(0,0,0,0.3);
+  }
+  50% {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 30px -15px rgba(0,0,0,0.2);
+  }
+}
+
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -140,7 +151,10 @@
 }
 
 .float-shadow {
-  animation: floatWithShadow 6s ease-in-out infinite;
+  animation: float-shadow 4s ease-in-out infinite;
+  will-change: transform;  /* Optimize animations */
+  backface-visibility: hidden;  /* Reduce flickering */
+  perspective: 1000px;  /* Improve 3D transforms */
 }
 
 .shimmer {
