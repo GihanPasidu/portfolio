@@ -3,14 +3,60 @@ import { Repository, getRepositories } from '../services/github';
 
 const Projects: React.FC = () => {
   const [repos, setRepos] = useState<Repository[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const fetchRepos = async () => {
-      const data = await getRepositories('GihanPasidu');
-      setRepos(data);
+      try {
+        setIsLoading(true);
+        const data = await getRepositories('GihanPasidu');
+        setRepos(data);
+      } catch (err) {
+        setError('Failed to load projects. Please try again later.');
+        console.error('Error fetching repositories:', err);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchRepos();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient">Loading Projects</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-100/20 p-4 animate-pulse">
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-red-500">Oops!</h2>
+          <p className="text-gray-600">{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -22,11 +68,10 @@ const Projects: React.FC = () => {
           {repos.map((repo, index) => (
             <div 
               key={repo.id} 
-              className="hover-3d bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-100/20"
+              className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-100/20 transform hover:-translate-y-1 transition-all duration-300"
               style={{ 
                 opacity: 0,
-                animation: 'fadeUp 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards',
-                animationDelay: `${index * 0.15}s`
+                animation: `fadeIn 0.5s ease-out ${index * 0.1}s forwards`
               }}
             >
               <div className="p-4 md:p-6">

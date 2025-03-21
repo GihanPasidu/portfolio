@@ -160,7 +160,7 @@ const Home: React.FC = () => {
                   )}
                   {profile.blog && (
                     <div className="flex items-center text-gray-600">
-                      <span className="font-medium">🌐 Website:</span>{' '}
+                      <span className="font-medium">🌐 Email:</span>{' '}
                       <a href={profile.blog} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                         {profile.blog}
                       </a>
