@@ -19,22 +19,22 @@ const Home: React.FC = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="md:flex">
-            <div className="md:shrink-0 p-6 md:p-8 bg-gradient-to-br from-blue-800 to-blue-900">
+          <div className="flex flex-col md:flex-row">
+            <div className="w-full md:w-auto p-6 md:p-8 bg-gradient-to-br from-blue-800 to-blue-900 text-center md:text-left">
               <img 
                 src={profile.avatar_url} 
                 alt="Profile" 
-                className="h-48 w-48 rounded-full border-4 border-white shadow-xl mx-auto animate-float"
+                className="h-32 w-32 md:h-48 md:w-48 rounded-full border-4 border-white shadow-xl mx-auto animate-float"
               />
               <div className="mt-6 text-center text-white">
                 <h1 className="text-3xl font-bold">{profile.name}</h1>
                 <p className="text-blue-200 mt-2">@{profile.login}</p>
               </div>
             </div>
-            <div className="p-6 md:p-8 fade-in" style={{animationDelay: '0.3s'}}>
+            <div className="p-6 md:p-8 fade-in w-full" style={{animationDelay: '0.3s'}}>
               <div className="prose max-w-none">
                 <p className="text-lg text-gray-600 leading-relaxed">{profile.bio}</p>
                 <div className="mt-6 space-y-3">
@@ -75,7 +75,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           <StatCard
             title="Repositories"
             value={profile.public_repos}

@@ -51,13 +51,14 @@ const Contact: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
-          <h2 className="text-3xl font-bold mb-6">Let's Connect</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">Let's Connect</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Social Links */}
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-              <div className="space-y-4">
+            <div className="order-2 md:order-1">
+              <h3 className="text-lg md:text-xl font-semibold mb-4">Contact Information</h3>
+              <div className="space-y-3">
                 {socialLinks.map((social, index) => (
                   <a
                     key={social.name}
@@ -82,8 +83,8 @@ const Contact: React.FC = () => {
             </div>
 
             {/* Contact Form */}
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Send a Message</h3>
+            <div className="order-1 md:order-2">
+              <h3 className="text-lg md:text-xl font-semibold mb-4">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">
