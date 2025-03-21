@@ -38,7 +38,7 @@ const Contact: React.FC = () => {
       name: 'LinkedIn',
       value: 'Gihan Pasidu',
       icon: <LinkedInIcon />,
-      link: 'https://www.linkedin.com/in/gihan-pasidu/'
+      link: 'www.linkedin.com/in/gihanpasidu/'
     },
     {
       name: 'WhatsApp',
