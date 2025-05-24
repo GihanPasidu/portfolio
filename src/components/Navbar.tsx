@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const menuItems = [
@@ -20,74 +20,154 @@ const menuItems = [
 ];
 
 const Navbar: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  
+  // Track scrolling to adjust transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="morph-gradient text-white shadow-lg backdrop-blur-md bg-opacity-80 sticky top-0 z-50 border-b border-white/10 navbar">
-      <div className="container mx-auto px-4 py-4 navbar-container">
-        <Link to="/" className="text-xl md:text-2xl font-bold tracking-tight hover:text-blue-200 transition-all duration-300 navbar-logo">
-          <span className="gradient-text">Gihan Pasidu</span>
-        </Link>
-
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {isMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8 items-center">
-          {menuItems.map(({ path, label, icon }) => (
-            <Link
-              key={path}
-              to={path}
-              className={`${
-                isActive(path)
-                  ? 'text-white border-b-2 border-white shimmer'
-                  : 'text-blue-100 hover:text-white'
-              } font-medium transition-all duration-300 flex items-center space-x-2 px-4 py-2 rounded-lg
-                hover:bg-white/10 backdrop-blur-sm`}
-            >
-              <span className="text-sm">{icon}</span>
-              <span>{label}</span>
+    <nav className={`
+      fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      ${isScrolled 
+        ? 'bg-black/30 backdrop-blur-lg' 
+        : 'bg-transparent backdrop-blur-sm'}
+      border-b border-white/5
+    `}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0">
+            <Link to="/" className="text-white font-bold text-xl">
+              <div className="flex items-center">
+                <span className="bg-gradient-to-r from-blue-400 to-indigo-600 bg-clip-text text-transparent">
+                  Portfolio
+                </span>
+              </div>
             </Link>
-          ))}
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-center space-x-4">
+              {menuItems.map(({ path, label, icon }) => (
+                <NavLink
+                  key={path}
+                  to={path}
+                  isActive={isActive(path)}
+                >
+                  <span className="text-sm">{icon}</span>
+                  <span>{label}</span>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+          <div className="md:hidden">
+            <button 
+              onClick={toggleMobileMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              aria-expanded="false"
+            >
+              <svg 
+                className={`h-6 w-6 ${isMobileMenuOpen ? "hidden" : "block"}`}
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+              <svg 
+                className={`h-6 w-6 ${isMobileMenuOpen ? "block" : "hidden"}`}
+                xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor" 
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <div className={`${isMenuOpen ? 'max-h-48' : 'max-h-0'} md:hidden overflow-hidden transition-all duration-300 ease-in-out`}>
-        <div className="pt-2 pb-3 space-y-1">
+      
+      {/* Mobile menu, show/hide based on menu state */}
+      <div className={`${isMobileMenuOpen ? "block" : "hidden"} md:hidden`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/30 backdrop-blur-lg border-t border-white/10">
           {menuItems.map(({ path, label, icon }) => (
-            <Link
+            <MobileNavLink
               key={path}
               to={path}
-              onClick={() => setIsMenuOpen(false)}
-              className={`${
-                isActive(path)
-                  ? 'text-white bg-white/10 border-l-4 border-white'
-                  : 'text-blue-100 hover:text-white hover:bg-white/5'
-              } block px-4 py-2 text-base font-medium transition-all duration-300`}
+              isActive={isActive(path)}
             >
               <span className="inline-flex items-center space-x-2">
                 <span>{icon}</span>
                 <span>{label}</span>
               </span>
-            </Link>
+            </MobileNavLink>
           ))}
         </div>
       </div>
     </nav>
+  );
+};
+
+// Desktop NavLink component with hover effects matching the transparent style
+interface NavLinkProps {
+  to: string;
+  children: React.ReactNode;
+  isActive: boolean;
+}
+
+const NavLink: React.FC<NavLinkProps> = ({ to, children, isActive }) => {
+  return (
+    <Link
+      to={to}
+      className={`
+        px-3 py-2 rounded-md text-sm font-medium transition-all duration-300
+        ${isActive 
+          ? 'text-white bg-white/5 border border-white/20' 
+          : 'text-white/70 hover:text-white hover:bg-white/5'}
+      `}
+    >
+      {children}
+    </Link>
+  );
+};
+
+// Mobile NavLink component
+const MobileNavLink: React.FC<NavLinkProps> = ({ to, children, isActive }) => {
+  return (
+    <Link
+      to={to}
+      className={`
+        block px-3 py-2 rounded-md text-base font-medium transition-all
+        ${isActive 
+          ? 'bg-white/5 text-white border-l-4 border-blue-400' 
+          : 'text-white/70 hover:text-white hover:bg-white/5'}
+      `}
+    >
+      {children}
+    </Link>
   );
 };
 
