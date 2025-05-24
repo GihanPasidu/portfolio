@@ -1,23 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
+import ParticlesBackground from './components/ParticlesBackground';
 
-const App: React.FC = () => {
+function App() {
+  // Add effect to log when the app mounts to help with debugging
+  useEffect(() => {
+    console.log('App mounted');
+  }, []);
+
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-gray-100">
+    <Router>
+      <div className="app">
+        <ParticlesBackground />
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
       </div>
-    </BrowserRouter>
+    </Router>
   );
-};
+}
 
 export default App;

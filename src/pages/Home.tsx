@@ -1,5 +1,6 @@
 import React, { useEffect, useState, memo } from 'react';
 import { GithubProfile, getGithubProfile } from '../services/github';
+import StyledBox from '../components/StyledBox';
 
 const techStack = [
   {
@@ -132,101 +133,101 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-auto p-6 md:p-8 bg-gradient-to-br from-blue-800 to-blue-900 text-center">
-              <div className="relative mx-auto w-40 h-40 md:w-48 md:h-48">
-                <div className="absolute inset-0 rounded-full bg-blue-400/30 blur-xl"></div>
-                <div className="absolute inset-0 rounded-full border-4 border-blue-400/30 animate-pulse"></div>
-                <img 
-                  src={profile.avatar_url} 
-                  alt={profile.name || 'Profile Picture'}
-                  className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300 float-shadow"
-                  style={{ 
-                    objectFit: 'cover',
-                  }}
-                />
+    <div className="home-container">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-4xl mx-auto">
+          <StyledBox className="mb-6">
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-auto p-6 md:p-8 bg-gradient-to-br from-blue-800/80 to-blue-900/80 text-center rounded-lg">
+                <div className="relative mx-auto w-40 h-40 md:w-48 md:h-48">
+                  <div className="absolute inset-0 rounded-full bg-blue-400/30 blur-xl"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-blue-400/30 animate-pulse"></div>
+                  <img 
+                    src={profile?.avatar_url} 
+                    alt={profile?.name || 'Profile Picture'}
+                    className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300 float-shadow"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div className="mt-6 text-center text-white">
+                  <h1 className="text-3xl font-bold">{profile?.name}</h1>
+                  <p className="text-blue-200 mt-2">@{profile?.login}</p>
+                </div>
               </div>
-              <div className="mt-6 text-center text-white">
-                <h1 className="text-3xl font-bold">{profile.name}</h1>
-                <p className="text-blue-200 mt-2">@{profile.login}</p>
-              </div>
-            </div>
-            <div className="p-6 md:p-8 fade-in w-full" style={{animationDelay: '0.3s'}}>
-              <div className="prose max-w-none">
-                <p className="text-lg text-gray-600 leading-relaxed">{profile.bio}</p>
-                <div className="mt-6 space-y-3">
-                  {profile.location && (
-                    <div className="flex items-center text-gray-600">
-                      <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {profile.location}
+              <div className="p-6 md:p-8 fade-in w-full" style={{animationDelay: '0.3s'}}>
+                <div className="prose max-w-none">
+                  <p className="text-lg text-white/90 leading-relaxed">{profile.bio}</p>
+                  <div className="mt-6 space-y-3">
+                    {profile.location && (
+                      <div className="flex items-center text-white/80">
+                        <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {profile.location}
+                      </div>
+                    )}
+                    {profile.company && (
+                      <div className="flex items-center text-white/80">
+                        <span className="font-medium">🏢 Company:</span> {profile.company}
+                      </div>
+                    )}
+                    {profile.blog && (
+                      <div className="flex items-center text-white/80">
+                        <span className="font-medium">🌐 Website:</span>{' '}
+                        <a href={profile.blog} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">
+                          {profile.blog}
+                        </a>
+                      </div>
+                    )}
+                    {profile.email && (
+                      <div className="flex items-center text-white/80">
+                        <span className="font-medium">📧 Email:</span> {profile.email}
+                      </div>
+                    )}
+                    <div className="flex items-center text-white/80">
+                      <span className="font-medium">🎉 Joined:</span>{' '}
+                      {new Date(profile.created_at).toLocaleDateString()}
                     </div>
-                  )}
-                  {profile.company && (
-                    <div className="flex items-center text-gray-600">
-                      <span className="font-medium">🏢 Company:</span> {profile.company}
-                    </div>
-                  )}
-                  {profile.blog && (
-                    <div className="flex items-center text-gray-600">
-                      <span className="font-medium">🌐 Email:</span>{' '}
-                      <a href={profile.blog} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                        {profile.blog}
-                      </a>
-                    </div>
-                  )}
-                  {profile.email && (
-                    <div className="flex items-center text-gray-600">
-                      <span className="font-medium">📧 Email:</span> {profile.email}
-                    </div>
-                  )}
-                  <div className="flex items-center text-gray-600">
-                    <span className="font-medium">🎉 Joined:</span>{' '}
-                    {new Date(profile.created_at).toLocaleDateString()}
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </StyledBox>
 
-        {/* Tech Stack Section */}
-        <div className="mt-8 bg-white rounded-xl shadow-lg p-6 md:p-8">
-          <h2 className="text-2xl font-bold mb-6 text-gradient">Tech Stack</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {techStack.map((tech, index) => (
-              <TechStackItem key={tech.name} tech={tech} index={index} />
-            ))}
-          </div>
-        </div>
+          {/* Tech Stack Section */}
+          <StyledBox className="mb-6">
+            <h2 className="text-2xl font-bold mb-6 text-white">Tech Stack</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {techStack.map((tech, index) => (
+                <TechStackItem key={tech.name} tech={tech} index={index} />
+              ))}
+            </div>
+          </StyledBox>
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          <StatCard
-            title="Repositories"
-            value={profile.public_repos}
-            color="blue"
-          />
-          <StatCard
-            title="Followers"
-            value={profile.followers}
-            color="green"
-          />
-          <StatCard
-            title="Following"
-            value={profile.following}
-            color="purple"
-          />
-          <StatCard
-            title="Years Active"
-            value={new Date().getFullYear() - new Date(profile.created_at).getFullYear()}
-            color="yellow"
-            suffix="yrs"
-          />
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <StatCard
+              title="Repositories"
+              value={profile?.public_repos || 0}
+              color="blue"
+            />
+            <StatCard
+              title="Followers"
+              value={profile?.followers || 0}
+              color="green"
+            />
+            <StatCard
+              title="Following"
+              value={profile?.following || 0}
+              color="purple"
+            />
+            <StatCard
+              title="Years Active"
+              value={profile ? new Date().getFullYear() - new Date(profile.created_at).getFullYear() : 0}
+              color="yellow"
+              suffix="yrs"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -249,11 +250,11 @@ const StatCard = memo<StatCardProps>(({ title, value, color, suffix }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg transition-all duration-300 hover-lift hover:shadow-xl">
+    <div className="bg-white/5 backdrop-blur-md rounded-xl shadow-lg p-6 transition-all duration-300 hover-lift hover:shadow-xl border border-white/10">
       <div className={`text-3xl font-bold ${colorClasses[color]}`}>
         {value}{suffix}
       </div>
-      <div className="text-gray-600 mt-1">{title}</div>
+      <div className="text-white/80 mt-1">{title}</div>
     </div>
   );
 });
@@ -263,7 +264,7 @@ const TechStackItem = memo(({ tech, index }: { tech: typeof techStack[0]; index:
     href={tech.url}
     target="_blank"
     rel="noopener noreferrer"
-    className="group flex flex-col items-center p-4 bg-gray-50 rounded-lg hover-3d"
+    className="group flex flex-col items-center p-4 bg-white/5 backdrop-blur-md rounded-lg hover-3d border border-white/10"
     style={{
       opacity: 0,
       animation: 'fadeUp 0.5s ease-out forwards',
