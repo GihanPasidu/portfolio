@@ -84,7 +84,7 @@ const Projects: React.FC = () => {
   const hasMore = paginatedRepos.length < repos.length;
 
   return (
-    <div className="projects-container">
+    <div className="projects-container pt-24 md:pt-28"> {/* Increased top padding here */}
       <h1 className="text-3xl font-bold mb-8 text-center text-white">My Projects</h1>
       <div className="projects-grid">
         {paginatedRepos.map((repo) => (

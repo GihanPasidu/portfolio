@@ -39,7 +39,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="contact-container min-h-screen py-12">
+    <div className="contact-container min-h-screen py-12 pt-24 md:pt-28">
       <h1 className="text-3xl font-bold mb-8 text-center text-white">Contact Me</h1>
       
       <div className="max-w-4xl mx-auto px-4">
