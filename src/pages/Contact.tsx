@@ -59,7 +59,7 @@ const Contact: React.FC = () => {
                 </svg>
                 <div>
                   <h3 className="text-lg font-medium text-white">Email</h3>
-                  <a href="mailto:youremail@example.com" className="text-blue-400 hover:text-blue-300 transition-colors">youremail@example.com</a>
+                  <a href="mailto:cloudnextra@gmail.com" className="text-blue-400 hover:text-blue-300 transition-colors">cloudnextra@gmail.com</a>
                 </div>
               </div>
               
