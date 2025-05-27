@@ -536,3 +536,71 @@ input::placeholder, textarea::placeholder {
 .text-white\/70 {
   color: rgba(255, 255, 255, 0.7);
 }
+
+/* Add these mobile optimizations to your existing CSS */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Line clamp for text truncation */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Better touch targets for mobile */
+button, 
+a.cta-button, 
+.mobile-friendly-link {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Fix for fixed navbar on mobile */
+.content {
+  padding-top: 4rem;
+}
+
+/* Improve mobile scrolling */
+html, body {
+  overflow-x: hidden;
+  position: relative;
+  height: 100%;
+}
+
+/* Safe area inset padding for notched phones */
+@supports (padding: max(0px)) {
+  .mobile-safe-padding {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Optimize for mobile touch */
+input, 
+select, 
+textarea, 
+button {
+  font-size: 16px; /* Prevents iOS zoom on input focus */
+}
+
+/* Improve mobile visibility */
+.text-white/90 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.text-white/80 {
+  color: rgba(255, 255, 255, 0.8);
+}

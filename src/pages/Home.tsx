@@ -123,7 +123,7 @@ const Home: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div className="flex justify-center items-center min-h-screen">
+    return <div className="flex justify-center items-center min-h-screen px-4">
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
     </div>;
   }
@@ -133,28 +133,40 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="home-container">
-      <div className="container mx-auto px-4 py-8">
+    <div className="home-container pt-24 md:pt-28 px-4">
+      <h1 className="text-3xl font-bold mb-8 text-center text-white">Welcome to My Portfolio</h1>
+      <div className="home-content mb-8">
+        <StyledBox>
+          <p className="text-white/90 text-lg">
+            I am a software developer specializing in web development, 
+            creating responsive and interactive web applications.
+          </p>
+          <div className="cta-button mt-4">
+            <a href="/projects" className="inline-block bg-blue-600/90 hover:bg-blue-700 text-white font-medium rounded-lg px-5 py-2.5 transition-colors duration-300">View My Projects</a>
+          </div>
+        </StyledBox>
+      </div>
+      <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
-          <StyledBox className="mb-6">
+          <StyledBox className="mb-8">
             <div className="flex flex-col md:flex-row">
-              <div className="w-full md:w-auto p-6 md:p-8 bg-gradient-to-br from-blue-800/80 to-blue-900/80 text-center rounded-lg">
-                <div className="relative mx-auto w-40 h-40 md:w-48 md:h-48">
+              <div className="w-full md:w-auto p-6 bg-gradient-to-br from-blue-800/80 to-blue-900/80 text-center rounded-lg mb-6 md:mb-0">
+                <div className="relative mx-auto w-32 h-32 md:w-48 md:h-48">
                   <div className="absolute inset-0 rounded-full bg-blue-400/30 blur-xl"></div>
                   <div className="absolute inset-0 rounded-full border-4 border-blue-400/30 animate-pulse"></div>
                   <img 
                     src={profile?.avatar_url} 
                     alt={profile?.name || 'Profile Picture'}
-                    className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300 float-shadow"
+                    className="absolute inset-0 w-full h-full rounded-full object-cover border-4 border-white shadow-2xl transform hover:scale-105 transition-all duration-300"
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <div className="mt-6 text-center text-white">
-                  <h1 className="text-3xl font-bold">{profile?.name}</h1>
+                  <h1 className="text-2xl md:text-3xl font-bold">{profile?.name}</h1>
                   <p className="text-blue-200 mt-2">@{profile?.login}</p>
                 </div>
               </div>
-              <div className="p-6 md:p-8 fade-in w-full" style={{animationDelay: '0.3s'}}>
+              <div className="p-4 md:p-8 fade-in w-full" style={{animationDelay: '0.3s'}}>
                 <div className="prose max-w-none">
                   <p className="text-lg text-white/90 leading-relaxed">{profile.bio}</p>
                   <div className="mt-6 space-y-3">
@@ -196,16 +208,16 @@ const Home: React.FC = () => {
           </StyledBox>
 
           {/* Tech Stack Section */}
-          <StyledBox className="mb-6">
+          <StyledBox className="mb-8">
             <h2 className="text-2xl font-bold mb-6 text-white">Tech Stack</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
               {techStack.map((tech, index) => (
                 <TechStackItem key={tech.name} tech={tech} index={index} />
               ))}
             </div>
           </StyledBox>
 
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12">
             <StatCard
               title="Repositories"
               value={profile?.public_repos || 0}

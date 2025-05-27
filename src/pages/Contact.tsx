@@ -39,11 +39,11 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="contact-container min-h-screen py-12 pt-24 md:pt-28">
+    <div className="contact-container min-h-screen py-12 pt-24 md:pt-28 px-4">
       <h1 className="text-3xl font-bold mb-8 text-center text-white">Contact Me</h1>
       
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <StyledBox>
             <h2 className="text-xl font-semibold mb-4 text-white">Get in Touch</h2>
             <p className="text-white/80 mb-6">
@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
             </p>
             
             {/* Social Media Links - Vertical Layout */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Email */}
               <div className="flex items-start space-x-3">
                 <svg className="w-5 h-5 mt-1 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +152,7 @@ const Contact: React.FC = () => {
               
               <button 
                 type="submit" 
-                className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-300 flex justify-center items-center"
+                className="w-full py-3 px-4 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-300 flex justify-center items-center"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
