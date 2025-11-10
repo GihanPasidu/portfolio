@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
                 </svg>
                 <div>
                   <h3 className="text-lg font-medium text-white">LinkedIn</h3>
-                  <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">My LinkedIn Profile</a>
+                  <a href="https://linkedin.com/in/gihanpasidu" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">My LinkedIn Profile</a>
                 </div>
               </div>
               
@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
                 </svg>
                 <div>
                   <h3 className="text-lg font-medium text-white">Twitter</h3>
-                  <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">@YourTwitterHandle</a>
+                  <a href="https://x.com/gihan_pasidu_" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">@YourTwitterHandle</a>
                 </div>
               </div>
             </div>
