@@ -50,7 +50,9 @@ const Projects: React.FC = () => {
       try {
         setIsLoading(true);
         const data = await getRepositories('GihanPasidu');
-        setRepos(data);
+        // Filter out forked repositories
+        const ownRepos = data.filter(repo => !repo.fork);
+        setRepos(ownRepos);
       } catch (err) {
         setError('Failed to load projects. Please try again later.');
         console.error('Error fetching repositories:', err);

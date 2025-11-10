@@ -28,6 +28,7 @@ export interface Repository {
   topics: string[];
   created_at: string;
   updated_at: string;
+  fork: boolean;
   license: {
     name: string;
   } | null;

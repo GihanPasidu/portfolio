@@ -135,17 +135,6 @@ const Home: React.FC = () => {
   return (
     <div className="home-container pt-24 md:pt-28 px-4">
       <h1 className="text-3xl font-bold mb-8 text-center text-white">Welcome to My Portfolio</h1>
-      <div className="home-content mb-8">
-        <StyledBox>
-          <p className="text-white/90 text-lg">
-            I am a software developer specializing in web development, 
-            creating responsive and interactive web applications.
-          </p>
-          <div className="cta-button mt-4">
-            <a href="/projects" className="inline-block bg-blue-600/90 hover:bg-blue-700 text-white font-medium rounded-lg px-5 py-2.5 transition-colors duration-300">View My Projects</a>
-          </div>
-        </StyledBox>
-      </div>
       <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
           <StyledBox className="mb-8">

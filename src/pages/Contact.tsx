@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import StyledBox from '../components/StyledBox';
+import { emailConfig } from '../config/emailConfig';
 
 const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -19,9 +21,20 @@ const Contact: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
+    const templateParams = {
+      name: formState.name,
+      email: formState.email,
+      message: formState.message,
+      title: `Message from ${formState.name}`, // For the subject line
+    };
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await emailjs.send(
+        emailConfig.serviceId, 
+        emailConfig.templateId, 
+        templateParams, 
+        emailConfig.publicKey
+      );
       setSubmitResult({ 
         success: true, 
         message: 'Thank you for your message! I will get back to you soon.' 
@@ -29,6 +42,7 @@ const Contact: React.FC = () => {
       // Reset form
       setFormState({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setSubmitResult({ 
         success: false, 
         message: 'Sorry, there was an error sending your message. Please try again later.' 

@@ -499,9 +499,7 @@ input::placeholder, textarea::placeholder {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(45deg, #3b82f6, #2563eb, #60a5fa);
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
-      linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -524,18 +522,7 @@ input::placeholder, textarea::placeholder {
   backdrop-filter: blur(12px);
 }
 
-/* Improve visibility of text on transparent backgrounds */
-.text-white\/90 {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.text-white\/80 {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.text-white\/70 {
-  color: rgba(255, 255, 255, 0.7);
-}
+/* Tailwind handles these opacity classes with the slash notation natively */
 
 /* Add these mobile optimizations to your existing CSS */
 @media (max-width: 640px) {
@@ -556,6 +543,7 @@ input::placeholder, textarea::placeholder {
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -596,11 +584,4 @@ button {
   font-size: 16px; /* Prevents iOS zoom on input focus */
 }
 
-/* Improve mobile visibility */
-.text-white/90 {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.text-white/80 {
-  color: rgba(255, 255, 255, 0.8);
-}
+/* Tailwind handles these opacity classes natively */
