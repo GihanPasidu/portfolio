@@ -7,9 +7,8 @@ import Contact from './pages/Contact';
 import ParticlesBackground from './components/ParticlesBackground';
 
 function App() {
-  // Add effect to log when the app mounts to help with debugging
   useEffect(() => {
-    console.log('App mounted');
+    console.log('App mounted - Modern Portfolio 2026');
   }, []);
 
   return (
